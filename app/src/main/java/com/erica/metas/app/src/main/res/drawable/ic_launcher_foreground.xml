@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Texto "É12" Estilizado e Centralizado -->
+    <group
+        android:translateX="22"
+        android:translateY="35">
+        <!-- Letra É -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M5,10 h25 v6 h-18 v8 h15 v6 h-15 v10 h20 v6 h-27 Z" />
+        <!-- Acento Agudo do É -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M15,2 l8,4 l-3,3 l-8,-4 Z" />
+        <!-- Número 1 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M38,10 l-5,4 v6 l5,-4 v30 h7 v-42 Z" />
+        <!-- Número 2 -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M52,15 q0,-6 6,-6 t6,6 q0,5 -10,15 v15 h15 v6 h-22 v-5 q10,-10 10,-16 q0,-3 -3,-3 t-3,3 Z" />
+    </group>
+</vector>
