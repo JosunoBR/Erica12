@@ -4,7 +4,7 @@
             "outputFile": "com.erica.metas.app-mergeDebugResources-45:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Josué\\.gradle\\caches\\9.6.1\\transforms\\7340139238728602458305b93168f9f9\\transformed\\core-1.12.0\\res\\values-v21\\values-v21.xml",
+                    "source": "C:\\Users\\Josué\\.gradle\\caches\\9.6.1\\transforms\\bb5c9f667c7490db08f6083c98eb7580\\transformed\\core-1.12.0\\res\\values-v21\\values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",

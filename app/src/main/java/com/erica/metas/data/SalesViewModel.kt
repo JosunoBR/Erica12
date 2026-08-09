@@ -198,7 +198,13 @@ class SalesViewModel : ViewModel() {
         val todayCal = Calendar.getInstance()
         val isCurrentMonth = todayCal.get(Calendar.YEAR) == _currentCalendar.value.get(Calendar.YEAR) &&
                 todayCal.get(Calendar.MONTH) == _currentCalendar.value.get(Calendar.MONTH)
-        val todayDayNumber = if (isCurrentMonth) todayCal.get(Calendar.DAY_OF_MONTH) else 1
+        
+        // Se for o mês atual, começa a contar de hoje. Se for mês futuro, conta tudo. Se for passado, conta 0.
+        val todayDayNumber = when {
+            isCurrentMonth -> todayCal.get(Calendar.DAY_OF_MONTH)
+            _currentCalendar.value.after(todayCal) -> 1
+            else -> 99 // Mês passado não tem dias restantes
+        }
 
         return _daysList.value.count { day ->
             day.dayNumber >= todayDayNumber && !day.isSunday && !day.isHoliday

@@ -54,7 +54,7 @@ fun HomeScreen(
     val isSuperMeta = viewModel.isSuperMetaActive()
     val monthYearLabel = viewModel.getMonthYearLabel()
 
-    // Filtra os domingos da exibição principal
+    // Filtra apenas os domingos (feriados continuam na lista para controle do usuário)
     val workingDaysList = daysList.filter { !it.isSunday }
 
     Box(modifier = modifier.fillMaxSize()) {

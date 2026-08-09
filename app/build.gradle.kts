@@ -60,6 +60,8 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.navigation.compose)
+    
+    testImplementation(libs.junit)
 }
 
 // Copy app icon from app/src/main/ic_launcher.png to res resources automatically

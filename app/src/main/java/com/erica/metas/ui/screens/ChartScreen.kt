@@ -39,7 +39,7 @@ fun ChartScreen(
     modifier: Modifier = Modifier
 ) {
     val daysList by viewModel.daysList.collectAsState()
-    val workingDays = daysList.filter { !it.isSunday }
+    val workingDays = daysList.filter { !it.isSunday && !it.isHoliday }
 
     val maxAmount = Math.max(workingDays.maxOfOrNull { it.amount } ?: 1000.0, 1000.0)
     val requiredAvg = viewModel.getRequiredDailyAverage()

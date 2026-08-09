@@ -38,16 +38,17 @@ fun DailySalesItem(
     onHolidayToggle: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val isGoalMet = daySale.amount >= requiredDailyAvg && requiredDailyAvg > 0 && daySale.amount > 0
+    val isHoliday = daySale.isHoliday
+    val isGoalMet = !isHoliday && daySale.amount >= requiredDailyAvg && requiredDailyAvg > 0 && daySale.amount > 0
 
     val cardBg = when {
-        daySale.isHoliday -> MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
+        isHoliday -> MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.4f)
         isGoalMet -> GreenLightBg.copy(alpha = 0.6f)
         else -> MaterialTheme.colorScheme.surface
     }
 
     val cardBorderColor = when {
-        daySale.isHoliday -> Color.Gray.copy(alpha = 0.3f)
+        isHoliday -> Color.Gray.copy(alpha = 0.2f)
         isGoalMet -> GreenPrimary
         else -> MaterialTheme.colorScheme.outline
     }
@@ -78,7 +79,7 @@ fun DailySalesItem(
                         modifier = Modifier
                             .size(38.dp)
                             .background(
-                                color = if (daySale.isHoliday) Color.LightGray else MaterialTheme.colorScheme.primaryContainer,
+                                color = if (isHoliday) Color.LightGray.copy(alpha = 0.5f) else MaterialTheme.colorScheme.primaryContainer,
                                 shape = CircleShape
                             )
                     ) {
@@ -86,7 +87,7 @@ fun DailySalesItem(
                             text = "${daySale.dayNumber}",
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
-                            color = if (daySale.isHoliday) Color.DarkGray else MaterialTheme.colorScheme.primary
+                            color = if (isHoliday) Color.Gray else MaterialTheme.colorScheme.primary
                         )
                     }
 
@@ -95,11 +96,11 @@ fun DailySalesItem(
                             text = daySale.dayOfWeekName,
                             fontSize = 14.sp,
                             fontWeight = FontWeight.SemiBold,
-                            color = MaterialTheme.colorScheme.onBackground
+                            color = if (isHoliday) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f) else MaterialTheme.colorScheme.onBackground
                         )
 
                         // Indicadores Visuais de Desempenho
-                        if (daySale.isHoliday) {
+                        if (isHoliday) {
                             Text(
                                 text = "🏖️ Feriado",
                                 fontSize = 11.sp,
@@ -124,7 +125,7 @@ fun DailySalesItem(
                         modifier = Modifier.padding(end = 6.dp)
                     ) {
                         Checkbox(
-                            checked = daySale.isHoliday,
+                            checked = isHoliday,
                             onCheckedChange = onHolidayToggle,
                             colors = CheckboxDefaults.colors(
                                 checkedColor = Color(0xFFD97706)
@@ -139,8 +140,9 @@ fun DailySalesItem(
 
                     CurrencyAmountInput(
                         label = "Venda",
-                        rawDigits = daySale.digits,
-                        onDigitsChange = onDigitsChange,
+                        rawDigits = if (isHoliday) "0" else daySale.digits,
+                        onDigitsChange = if (isHoliday) { _ -> } else onDigitsChange,
+                        enabled = !isHoliday,
                         modifier = Modifier.width(140.dp)
                     )
                 }

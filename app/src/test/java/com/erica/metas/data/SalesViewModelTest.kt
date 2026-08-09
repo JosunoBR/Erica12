@@ -19,16 +19,23 @@ class SalesViewModelTest {
 
     @Test
     fun `test holiday exclusion with zero sales (Targeting Meta)`() {
+        // Reset state
+        viewModel = SalesViewModel()
+        viewModel.updateGoals("100000", "200000") // Meta 1000.00
+        
         val initialAvg = viewModel.getRequiredDailyAverage()
         
         // Mark the first non-Sunday day as holiday
-        val firstWorkingDay = viewModel.daysList.value.first { !it.isSunday }.dayNumber
+        val workingDays = viewModel.daysList.value.filter { !it.isSunday }
+        val firstWorkingDay = workingDays.first().dayNumber
+        
         viewModel.toggleHoliday(firstWorkingDay, true)
         
         val afterHolidayAvg = viewModel.getRequiredDailyAverage()
         
-        assertNotEquals("Average should change when a holiday is added", initialAvg, afterHolidayAvg)
-        assert(afterHolidayAvg > initialAvg) { "Average should increase when working days decrease" }
+        assert(afterHolidayAvg > initialAvg) { 
+            "Average should increase when a working day is removed (Initial: $initialAvg, After: $afterHolidayAvg)" 
+        }
     }
 
     @Test

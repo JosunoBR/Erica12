@@ -17,7 +17,8 @@ fun CurrencyAmountInput(
     label: String,
     rawDigits: String,
     onDigitsChange: (String) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true
 ) {
     OutlinedTextField(
         value = rawDigits,
@@ -34,6 +35,7 @@ fun CurrencyAmountInput(
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
         visualTransformation = CurrencyVisualTransformation(),
         singleLine = true,
+        enabled = enabled,
         modifier = modifier
     )
 }
